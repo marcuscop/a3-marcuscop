@@ -1,0 +1,119 @@
+<html lang = en>
+
+<head>
+<link rel="stylesheet" type="text/css" href="css/style.css"/>
+<script src="js/scripts.js"></script>
+
+<div class="header">
+    	<h1>Collection Of Books</h1>
+    	<p><i>Let's get going</i></p>
+
+</div>
+
+</head>
+
+<body>
+
+  <h2>Add A Book</h2>
+
+      <div class="content">
+      	<form id="form1">
+      	<p>
+  	    	<label for="author">
+  	    		<span>Author: </span>
+  	    	</label>
+  	    	<input type = "text" id="author" name="author">
+      	</p>
+
+        <p>
+  	    	<label for="title">
+  	    		<span>Title: </span>
+  	    	</label>
+  	    	<input type = "text" id="title" name="name">
+      	</p>
+
+        <p>
+  	    	<label for="body">
+  	    		<span>Body: </span>
+  	    	</label>
+  	    	<input type = "text" id="body" name="body">
+      	</p>
+
+        </form>
+      </div>
+
+      <p>
+  			<button onclick="handle_add()"> ADD </button>
+  		</p>
+
+  <h2>Modify A Book</h2>
+
+      <div class="content">
+      	<form id="form2">
+      	<p>
+  	    	<label for="oldtitle">
+  	    		<span>Existing Title: </span>
+  	    	</label>
+  	    	<input type = "text" id="oldtitle" name="oldtitle">
+      	</p>
+
+        <p>
+  	    	<label for="author">
+  	    		<span>New Author: </span>
+  	    	</label>
+  	    	<input type = "text" id="author" name="author">
+      	</p>
+
+        <p>
+  	    	<label for="newtitle">
+  	    		<span>New Title: </span>
+  	    	</label>
+  	    	<input type = "text" id="newtitle" name="newtitle">
+      	</p>
+
+        <p>
+  	    	<label for="body">
+  	    		<span>New Body: </span>
+  	    	</label>
+  	    	<input type = "text" id="body" name="body">
+      	</p>
+
+        </form>
+      </div>
+
+      <p>
+  			<button onclick="handle_modify()"> MODIFY </button>
+  		</p>
+
+  <h2>Delete A Book</h2>
+
+      <div class="content">
+          <form id="form3">
+          <p>
+            <label for="title">
+              <span>Title: </span>
+            </label>
+            <input type = "text" id="title" name="title">
+          </p>
+          </form>
+        </div>
+
+        <p>
+          <button onclick="handle_delete()"> DELETE </button>
+        </p>
+
+  <h2>Get All The Books</h2>
+
+  <button onclick = "get()"> GET </button>
+
+  <table id="myTable">
+		  <tr style="text-align:center">
+		    <th>Author</th>
+		    <th>Title</th>
+		    <th>Body</th>
+		  </tr>
+	</table>
+
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+body {
+	padding-left: 16px;
+	background-image: url(background.jpg);
+	background-size: cover;
+	font-family: 'Helvetica', serif;
+
+}
+
+div.header{
+  color: lightblue;
+	font-style: italic;
+	font-family: 'Helvetica', serif;
+	font-size: 1.5em;
+	text-align: center;
+}
+
+button {
+	text-align: center;
+	background-color: #cc99ff;
+	font-family: 'Helvetica', serif;
+	font-size: 1em;
+	color: black;
+	border-radius: 20%;
+	padding: 10px 10px;
+}
+
+button:hover {
+	opacity: 0.6;
+}
+
+table {
+    width:100%;
+}
+table, th, td {
+    border: 1px solid black;
+    /*border-collapse: collapse;*/
+}
+th, td {
+    padding: 15px;
+    text-align: left;
+}
+table tr:nth-child(even) {
+    background-color: #eee;
+}
+table tr:nth-child(odd) {
+   background-color: #fff;
+}
+table tr:hover {
+  background-color: #f1f1f1;
+}
+table th {
+    background-color: #cc99ff;
+    color: white;
+}
