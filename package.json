@@ -4,7 +4,7 @@
   "description": "Stuff",
   "main": "insert.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node insert.js"
   },
   "author": "",
   "license": "ISC",
