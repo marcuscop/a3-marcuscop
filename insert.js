@@ -54,8 +54,8 @@ var server = http.createServer (function (req, res) {
   }
 })
 
-server.listen(process.env.PORT || port);
-console.log('listening on 8080')
+//server.listen(process.env.PORT || port);
+//console.log('listening on 8080')
 
 // subroutines
 // NOTE: this is an ideal place to add your data functionality
