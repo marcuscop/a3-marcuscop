@@ -1,3 +1,6 @@
+// "mysql": "^2.16.0",
+
+
 function send(data, type){ // type is the type of operation (add, delete, or modify)
   console.log("sending post request");
   data.push(type);

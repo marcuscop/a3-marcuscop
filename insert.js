@@ -3,6 +3,17 @@ var http = require('http')
   , url  = require('url')
   , port = 8000;
 
+const pg = require('pg');
+
+const pool = new pg.Pool ({
+  host: "localhost",
+  user: "postgres",
+  password: "password",
+  database: "postgres"
+});
+
+
+/*
 var mysql = require('mysql');
 
 var con = mysql.createConnection({
@@ -12,10 +23,13 @@ var con = mysql.createConnection({
   database: "stuff"
 });
 
+
 con.connect(function(err) {
   if (err) throw err;
   console.log("Connected!");
 });
+
+*/
 
 var server = http.createServer (function (req, res) {
 
@@ -62,7 +76,19 @@ function sendFile(res, filename, contentType) {
 function handle_get(req, res){
   // turn DB into object that can be sent to the client
 
-  var query = con.query('select * from stuff', function(err, result){
+  var query_string = "select * from stuff";
+  pool.query(query_string, function(err, result){
+    if(err){
+      console.log(err);
+      return;
+    }
+    res.writeHead(200, {"Content-Type": "application/json"});
+    res.write(JSON.stringify(result.rows));
+    res.end();
+    console.log(result.rows);
+  })
+
+  /*var query = con.query('select * from stuff', function(err, result){
     if(err){
       console.log(err);
       return;
@@ -71,7 +97,7 @@ function handle_get(req, res){
     res.write(JSON.stringify(result));
     res.end();
     //console.log(result);
-  });
+  });*/
 
 }
 
@@ -101,12 +127,17 @@ function handle_post(req){
 
 function handle_add(arr){
 
-  var data = {
-    author: arr[0],
-    title: arr[1],
-    body: arr[2]
-  };
+  var query_string = "INSERT INTO stuff (author, title, body) values ('" + arr[0] + "','" + arr[1] + "','" + arr[2] + "')";
+  console.log(query_string);
+  pool.query(query_string, function(err, result){
+    if(err){
+      console.log(err);
+      return;
+    }
+    console.log(result);
+  })
 
+/*
   var query = con.query('insert into stuff set ?', data, function(err, result){
     if(err){
       console.log(err);
@@ -115,12 +146,24 @@ function handle_add(arr){
 
     console.log(result);
   });
+  */
 
 }
 
 function handle_delete(arr){
   var title = arr[0];
 
+  var query_string = "DELETE FROM stuff WHERE title = '" + arr[0] + "'";
+  console.log(query_string);
+  pool.query(query_string, function(err, result){
+    if(err){
+      console.log(err);
+      return;
+    }
+    console.log(result);
+  })
+
+  /*
   var query = con.query('delete from stuff where title = ?', title, function(err, result){
     if(err){
       console.log(err);
@@ -129,8 +172,9 @@ function handle_delete(arr){
 
     console.log(result);
   });
-
+  */
 }
+
 
 function handle_modify(arr){
   var author = arr[0];
@@ -138,8 +182,18 @@ function handle_modify(arr){
   var body = arr[2];
   var new_title = arr[3];
 
-  var query_string = 'update stuff set author = ?, title = ?, body = ? where title = ?';
+  var query_string = "UPDATE stuff SET author = '" + author + "',title = '" +new_title+ "',body = '" + body + "' WHERE title = '" + title + "'";
+  console.log(query_string);
+  pool.query(query_string, function(err, result){
+    if(err){
+      console.log(err);
+      return;
+    }
+    console.log(result);
+  })
 
+  /*
+  var query_string = 'update stuff set author = ?, title = ?, body = ? where title = ?';
   var query = con.query(query_string, [author, new_title, body, title], function(err, result){
     if(err){
       console.log(err);
@@ -148,5 +202,6 @@ function handle_modify(arr){
 
     console.log(result);
   });
+  */
 
 }
