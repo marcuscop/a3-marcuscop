@@ -135,7 +135,7 @@ function handle_add(arr){
       return;
     }
     console.log(result);
-    client.end();
+    //client.end();
   })
 
 /*
@@ -163,7 +163,7 @@ function handle_delete(arr){
       return;
     }
     console.log(result);
-    client.end();
+    //client.end();
   })
 
   /*
@@ -194,7 +194,7 @@ function handle_modify(arr){
       return;
     }
     console.log(result);
-    client.end();
+    //client.end();
   })
 
   /*
