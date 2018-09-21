@@ -1,17 +1,14 @@
 var http = require('http')
   , fs   = require('fs')
   , url  = require('url')
-  , port = 8000;
+  , port = 5432;
 
-const pg = require('pg');
+  const { Client } = require('pg');
 
-const pool = new pg.Pool ({
-  host: "localhost",
-  user: "postgres",
-  password: "password",
-  database: "postgres"
-});
-
+  const client = new Client({
+    connectionString: process.env.DATABASE_URL,
+    ssl: true,
+  });
 
 /*
 var mysql = require('mysql');
@@ -75,9 +72,9 @@ function sendFile(res, filename, contentType) {
 
 function handle_get(req, res){
   // turn DB into object that can be sent to the client
-
+  client.connect();
   var query_string = "select * from stuff";
-  pool.query(query_string, function(err, result){
+  client.query(query_string, function(err, result){
     if(err){
       console.log(err);
       return;
@@ -86,6 +83,7 @@ function handle_get(req, res){
     res.write(JSON.stringify(result.rows));
     res.end();
     console.log(result.rows);
+    client.end();
   })
 
   /*var query = con.query('select * from stuff', function(err, result){
@@ -126,15 +124,16 @@ function handle_post(req){
 }
 
 function handle_add(arr){
-
+  client.connect();
   var query_string = "INSERT INTO stuff (author, title, body) values ('" + arr[0] + "','" + arr[1] + "','" + arr[2] + "')";
   console.log(query_string);
-  pool.query(query_string, function(err, result){
+  client.query(query_string, function(err, result){
     if(err){
       console.log(err);
       return;
     }
     console.log(result);
+    client.end();
   })
 
 /*
@@ -152,15 +151,17 @@ function handle_add(arr){
 
 function handle_delete(arr){
   var title = arr[0];
-
+  
   var query_string = "DELETE FROM stuff WHERE title = '" + arr[0] + "'";
   console.log(query_string);
-  pool.query(query_string, function(err, result){
+  client.connect();
+  client.query(query_string, function(err, result){
     if(err){
       console.log(err);
       return;
     }
     console.log(result);
+    client.end();
   })
 
   /*
@@ -184,12 +185,14 @@ function handle_modify(arr){
 
   var query_string = "UPDATE stuff SET author = '" + author + "',title = '" +new_title+ "',body = '" + body + "' WHERE title = '" + title + "'";
   console.log(query_string);
-  pool.query(query_string, function(err, result){
+  client.connect();
+  client.query(query_string, function(err, result){
     if(err){
       console.log(err);
       return;
     }
     console.log(result);
+    client.end();
   })
 
   /*
