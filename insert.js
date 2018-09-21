@@ -85,7 +85,7 @@ function handle_get(req, res){
     res.write(JSON.stringify(result.rows));
     res.end();
     console.log(result.rows);
-    client.end();
+    //client.end();
   })
 
   /*var query = con.query('select * from stuff', function(err, result){
