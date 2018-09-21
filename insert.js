@@ -1,7 +1,7 @@
 var http = require('http')
   , fs   = require('fs')
-  , url  = require('url')
-  , port = 5432;
+  , url  = require('url');
+  //, port = 5432;
 
 const pg = require('pg');
 
@@ -59,7 +59,7 @@ var server = http.createServer (function (req, res) {
   }
 })
 
-server.listen(process.env.PORT || port);
+//server.listen(process.env.PORT || port);
 //console.log('listening on 8080')
 
 // subroutines
