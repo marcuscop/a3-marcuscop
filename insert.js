@@ -1,15 +1,17 @@
 var http = require('http')
   , fs   = require('fs')
   , url  = require('url')
-  , port = 8000;
+  , port = 5432;
 
 const pg = require('pg');
 
 const pool = new pg.Pool ({
-  host: "localhost",
-  user: "postgres",
-  password: "password",
-  database: "postgres"
+  host: "ec2-174-129-32-37.compute-1.amazonaws.com",
+  user: "ybbgcyonkhxfkh",
+  password: "b050728e57088416717e0e22e004fe9525308d4ce83d7a157c0fd74af3c1810f",
+  database: "d303imgiddvnf9",
+  port: 5432
+  
 });
 
 
@@ -58,7 +60,7 @@ var server = http.createServer (function (req, res) {
 })
 
 server.listen(process.env.PORT || port);
-console.log('listening on 8080')
+//console.log('listening on 8080')
 
 // subroutines
 // NOTE: this is an ideal place to add your data functionality
