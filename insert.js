@@ -1,7 +1,7 @@
 var http = require('http')
   , fs   = require('fs')
   , url  = require('url')
-  , port = 8000;
+  , port = 8080;
 
   const {Pool, Client} = require('pg');
   const connectionString = 'postgres://ybbgcyonkhxfkh:b050728e57088416717e0e22e004fe9525308d4ce83d7a157c0fd74af3c1810f@ec2-174-129-32-37.compute-1.amazonaws.com:5432/d303imgiddvnf9';
