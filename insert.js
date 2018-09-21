@@ -10,6 +10,9 @@ var http = require('http')
     connectionString: connectionString,
   })
 
+  const pool = new Pool({
+    connectionString: connectionString,
+  })
 
 /*
 var mysql = require('mysql');
@@ -73,9 +76,9 @@ function sendFile(res, filename, contentType) {
 
 function handle_get(req, res){
   // turn DB into object that can be sent to the pool
-  client.connect();
+  pool.connect();
   var query_string = "select * from stuff";
-  client.query(query_string, function(err, result){
+  pool.query(query_string, function(err, result){
     if(err){
       console.log(err);
       return;
@@ -84,7 +87,7 @@ function handle_get(req, res){
     res.write(JSON.stringify(result.rows));
     res.end();
     console.log(result.rows);
-    client.end();
+    pool.end();
   })
 
   /*var query = con.query('select * from stuff', function(err, result){
@@ -125,16 +128,16 @@ function handle_post(req){
 }
 
 function handle_add(arr){
-  client.connect();
+  pool.connect();
   var query_string = "INSERT INTO stuff (author, title, body) values ('" + arr[0] + "','" + arr[1] + "','" + arr[2] + "')";
   console.log(query_string);
-  client.query(query_string, function(err, result){
+  pool.query(query_string, function(err, result){
     if(err){
       console.log(err);
       return;
     }
     console.log(result);
-    client.end();
+    pool.end();
   })
 
 /*
@@ -155,14 +158,14 @@ function handle_delete(arr){
 
   var query_string = "DELETE FROM stuff WHERE title = '" + arr[0] + "'";
   console.log(query_string);
-  client.connect();
-  client.query(query_string, function(err, result){
+  pool.connect();
+  pool.query(query_string, function(err, result){
     if(err){
       console.log(err);
       return;
     }
     console.log(result);
-    client.end();
+    pool.end();
   })
 
   /*
@@ -186,14 +189,14 @@ function handle_modify(arr){
 
   var query_string = "UPDATE stuff SET author = '" + author + "',title = '" +new_title+ "',body = '" + body + "' WHERE title = '" + title + "'";
   console.log(query_string);
-  client.connect();
-  client.query(query_string, function(err, result){
+  pool.connect();
+  pool.query(query_string, function(err, result){
     if(err){
       console.log(err);
       return;
     }
     console.log(result);
-    client.end();
+    pool.end();
   })
 
   /*
